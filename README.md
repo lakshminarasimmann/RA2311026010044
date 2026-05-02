@@ -360,7 +360,3 @@ All API endpoints were tested using Postman. Each screenshot shows the **request
 ![GET /health — Health Check (200 OK)](screenshots/06_get_health_check.png)
 
 ---
-
-## 📄 License
-
-MIT
