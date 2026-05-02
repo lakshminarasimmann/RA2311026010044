@@ -1,0 +1,16 @@
+{
+  "name": "@eval/logging-middleware",
+  "version": "1.0.0",
+  "description": "Reusable centralized logging middleware for the evaluation backend system",
+  "main": "index.js",
+  "keywords": [
+    "logging",
+    "middleware",
+    "backend"
+  ],
+  "author": "Prasanna",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.15.2"
+  }
+}

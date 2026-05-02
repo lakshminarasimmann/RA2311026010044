@@ -1,0 +1,17 @@
+{
+  "name": "vehicle-maintenance-scheduler",
+  "version": "1.0.0",
+  "description": "Production-grade vehicle maintenance scheduling service with integrated logging",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "dotenv": "^16.4.5"
+  },
+  "keywords": ["vehicle", "maintenance", "scheduler", "backend"],
+  "author": "Prasanna",
+  "license": "MIT"
+}

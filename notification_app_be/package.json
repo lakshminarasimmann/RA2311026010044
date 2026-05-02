@@ -1,0 +1,16 @@
+{
+  "name": "notification-app-be",
+  "version": "1.0.0",
+  "description": "Authentication and notification backend utilities",
+  "main": "index.js",
+  "scripts": {
+    "register": "node src/auth/register.js",
+    "get-token": "node src/auth/getToken.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "keywords": ["notification", "auth", "backend"],
+  "author": "Prasanna",
+  "license": "MIT"
+}
