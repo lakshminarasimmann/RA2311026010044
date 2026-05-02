@@ -242,6 +242,40 @@ The application follows a **layered architecture** pattern:
 
 ---
 
+## 💭 My Approach & Thought Process
+
+When I first read through the requirements, the core challenge was clear — build a **reusable logging middleware** that works seamlessly across the entire backend, not just a basic `console.log` wrapper. So that's where I started.
+
+### Why I structured it this way
+
+I went with a **layered architecture** (Routes → Controllers → Services → Repositories) because it keeps things clean and testable. Each layer has a single responsibility, and the logging middleware plugs into every layer naturally. When a request comes in, you can trace its entire journey through the logs — from the route it hit, to the controller validating input, to the service running business logic, down to the repository touching data.
+
+### How the logging integration actually works
+
+The `Log()` function does two things simultaneously:
+1. **Prints to console** — so I can see what's happening locally during development
+2. **Sends an async POST** to the evaluation server (`http://20.207.122.201/evaluation-service/logs`) — this is the actual integration
+
+The key design decision was making the remote call **fire-and-forget**. If the external server is down or slow, my app doesn't break or hang. Logging should never crash the application it's supposed to monitor — that would defeat the purpose. I wrapped everything in try/catch with a 5-second timeout as a safety net.
+
+### How I verified everything works
+
+I tested this in two stages:
+
+1. **Local API testing (Postman)** — I hit all my endpoints (`POST /vehicles`, `GET /vehicles`, error cases, maintenance scheduling, etc.) and confirmed correct responses with proper status codes. The screenshots below show these results. As per the assignment docs, these screenshots are from my own app, not the test server.
+
+2. **Remote logging verification** — I wrote a dedicated test script (`testLogger.js`) that sends 3 log entries (INFO, ERROR, FATAL) directly to the evaluation server. All 3 came back with `201 Created` and a valid `logID`, confirming the integration is working end-to-end.
+
+### What I'd improve with more time
+
+- Swap the in-memory store for a proper database (PostgreSQL or MongoDB)
+- Add JWT-based auth middleware to protect the vehicle/maintenance endpoints
+- Implement log batching — instead of one HTTP call per log, queue them and send in batches every few seconds
+- Add rate limiting and request validation middleware
+- Write unit tests with Jest
+
+---
+
 ## 📸 Postman API Test Screenshots
 
 All API endpoints were tested using Postman. Each screenshot shows the **request URL**, **request body**, **response**, and **response time**.
